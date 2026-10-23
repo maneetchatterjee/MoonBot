@@ -161,6 +161,10 @@ An initial server study produced seven one-million-step checkpoints before audit
 - [External assets and licenses](docs/external_assets.md)
 - [CV-ready technical project points](docs/CV_POINTS.md)
 
+## Legacy repository material
+
+The top-level `envs/`, `rl/`, and `train/` directories and the SolidWorks ZIP archives are retained from the repository's initial PyBullet/CAD prototype for provenance. The maintained research implementation is the installable `moonbot/` package, with its MuJoCo models in `assets/mjcf/`, experiment definitions in `configs/`, validation in `tests/`, and current commands documented above.
+
 ## Citation
 
 MoonBot-X is an original composite research implementation. If used in academic work, cite this repository and the upstream Sawppy/Curio and MuJoCo Menagerie Panda assets listed in `docs/external_assets.md`.
