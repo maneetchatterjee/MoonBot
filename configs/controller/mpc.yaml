@@ -1,0 +1,9 @@
+horizon: 8
+timestep_s: 0.04
+time_budget_s: 0.25
+maximum_linear_acceleration_m_s2: 1.2
+maximum_yaw_acceleration_rad_s2: 1.8
+maximum_linear_velocity_m_s: 1.5
+maximum_yaw_velocity_rad_s: 1.5
+maximum_wheel_torque_nm: 30.0
+fallback: pid

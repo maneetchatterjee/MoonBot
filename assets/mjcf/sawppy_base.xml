@@ -1,0 +1,195 @@
+<mujoco model="MoonBot-X Sawppy-derived mobile Panda">
+  <compiler angle="radian" autolimits="true" inertiafromgeom="auto"/>
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" solver="Newton"
+          iterations="120" cone="pyramidal" impratio="20" noslip_iterations="20"/>
+  <size nconmax="800" njmax="3000"/>
+  <visual>
+    <global offwidth="1280" offheight="720"/>
+    <headlight ambient="0.32 0.32 0.32" diffuse="0.75 0.75 0.75" specular="0.25 0.25 0.25"/>
+  </visual>
+  <default>
+    <joint armature="0.01" damping="0.08" frictionloss="0.02"/>
+    <geom condim="6" solref="0.004 1" solimp="0.95 0.99 0.001"/>
+    <default class="suspension">
+      <joint type="hinge" axis="0 1 0" armature="0.08" damping="2.0" frictionloss="0.18"/>
+    </default>
+    <default class="steering">
+      <joint type="hinge" axis="0 0 1" armature="0.04" damping="0.8" frictionloss="0.08" range="-0.75 0.75"/>
+    </default>
+    <default class="wheel">
+      <joint type="hinge" axis="0 1 0" damping="0.18" armature="0.06" limited="false"/>
+      <geom type="cylinder" size="0.12 0.10" rgba="0.055 0.06 0.065 1"
+            friction="1.25 0.02 0.003" priority="1" solref="0.003 1"/>
+    </default>
+  </default>
+  <asset>
+    <texture name="ground" type="2d" builtin="checker" rgb1="0.20 0.23 0.25" rgb2="0.13 0.15 0.17" width="512" height="512"/>
+    <material name="ground" texture="ground" texrepeat="3 3" reflectance="0.05"/>
+    <material name="rover_dark" rgba="0.16 0.18 0.20 1"/>
+    <material name="rover_metal" rgba="0.36 0.39 0.42 1" specular="0.4" shininess="0.3"/>
+    <mesh name="sawppy_body" file="../meshes/sawppy/body_box.stl" scale="2 2 2"/>
+    <mesh name="sawppy_differential" file="../meshes/sawppy/differential.stl" scale="2 2 2"/>
+    <mesh name="sawppy_left_rocker" file="../meshes/sawppy/left_rocker_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_right_rocker" file="../meshes/sawppy/right_rocker_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_left_bogie" file="../meshes/sawppy/left_bogie_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_right_bogie" file="../meshes/sawppy/right_bogie_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_front_left_steer" file="../meshes/sawppy/front_left_steering_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_front_right_steer" file="../meshes/sawppy/front_right_steering_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_back_left_steer" file="../meshes/sawppy/back_left_steering_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_back_right_steer" file="../meshes/sawppy/back_right_steering_asm.stl" scale="2 2 2"/>
+    <mesh name="sawppy_wheel" file="../meshes/sawppy/wheel_asm.stl" scale="2 2 2"/>
+  </asset>
+  <worldbody>
+    <light pos="0 -3 5" dir="0 0.5 -1" directional="true"/>
+    <geom name="ground" type="plane" size="20 20 0.1" material="ground" friction="1.2 0.01 0.002"/>
+    <site name="place_target" type="box" pos="1.05 0 0.0005" size="0.09 0.09 0.0005"
+          rgba="0.12 0.70 0.28 0.55"/>
+    <geom name="terrain_00" type="box" pos="2.50 0 0.15" size="1.50 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_01" type="box" pos="1.42 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_02" type="box" pos="1.84 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_03" type="box" pos="2.26 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_04" type="box" pos="2.68 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_05" type="box" pos="3.10 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_06" type="box" pos="3.52 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_07" type="box" pos="3.94 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_08" type="box" pos="4.36 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_09" type="box" pos="4.78 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_10" type="box" pos="5.20 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_11" type="box" pos="5.62 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_12" type="box" pos="6.04 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_13" type="box" pos="6.46 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_14" type="box" pos="6.88 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <geom name="terrain_15" type="box" pos="7.30 0 0.15" size="0.25 0.8 0.15" rgba="0.33 0.29 0.22 0"/>
+    <body name="base" pos="0 0 0.417">
+      <freejoint name="base_free"/>
+      <inertial pos="0 0 0.015" mass="45" diaginertia="1.35 2.84 3.93"/>
+      <geom name="chassis_collision" type="box" size="0.425 0.285 0.093" rgba="0.18 0.20 0.22 0.15"/>
+      <geom name="chassis_visual" type="mesh" mesh="sawppy_body" material="rover_dark" contype="0" conaffinity="0"/>
+      <geom name="differential_visual" type="mesh" mesh="sawppy_differential" pos="0 0 0.1362"
+            material="rover_metal" contype="0" conaffinity="0"/>
+      <geom name="panda_mount" type="cylinder" size="0.13 0.045" pos="0.12 0 0.116"
+            euler="0 0.523599 0" mass="2.5" rgba="0.10 0.12 0.14 1"/>
+      <site name="imu" pos="0 0 0.14" size="0.015" rgba="0 1 0 1"/>
+
+      <body name="left_rocker" pos="0.142 0.31 0.0236">
+        <inertial pos="-0.05 0 -0.04" mass="3.0" diaginertia="0.10 0.14 0.08"/>
+        <joint name="left_rocker_joint" class="suspension" range="-0.7854 0.7854"/>
+        <geom type="mesh" mesh="sawppy_left_rocker" material="rover_metal" contype="0" conaffinity="0"/>
+        <body name="front_left_steer" pos="0.4232 0.15 -0.0558">
+          <inertial mass="2.4" pos="0 0 -0.05" diaginertia="0.025 0.025 0.018"/>
+          <joint name="front_left_steer_joint" class="steering"/>
+          <geom type="mesh" mesh="sawppy_front_left_steer" material="rover_metal" contype="0" conaffinity="0"/>
+          <body name="wheel_fl" pos="0 0 -0.264">
+            <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+            <joint name="wheel_fl_joint" class="wheel"/>
+            <geom name="wheel_fl_geom" class="wheel" euler="1.5708 0 0"/>
+            <geom name="wheel_fl_visual" type="mesh" mesh="sawppy_wheel" euler="1.5708 0 0"
+                  material="rover_dark" contype="0" conaffinity="0"/>
+          </body>
+        </body>
+        <body name="left_bogie" pos="-0.362 0.05 -0.124">
+          <inertial pos="-0.03 0 -0.02" mass="3.0" diaginertia="0.09 0.12 0.07"/>
+          <joint name="left_bogie_joint" class="suspension" range="-0.7854 0.7854" damping="1.5"/>
+          <geom type="mesh" mesh="sawppy_left_bogie" material="rover_metal" contype="0" conaffinity="0"/>
+          <body name="wheel_ml" pos="0.2126 0.1858 -0.1918">
+            <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+            <joint name="wheel_ml_joint" class="wheel"/>
+            <geom name="wheel_ml_geom" class="wheel" euler="1.5708 0 0"/>
+            <geom name="wheel_ml_visual" type="mesh" mesh="sawppy_wheel" euler="1.5708 0 0"
+                  material="rover_dark" contype="0" conaffinity="0"/>
+          </body>
+          <body name="back_left_steer" pos="-0.298 0.10 0.0676">
+            <inertial mass="2.4" pos="0 0 -0.05" diaginertia="0.025 0.025 0.018"/>
+            <joint name="back_left_steer_joint" class="steering"/>
+            <geom type="mesh" mesh="sawppy_back_left_steer" material="rover_metal" contype="0" conaffinity="0"/>
+            <body name="wheel_rl" pos="0 0 -0.264">
+              <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+              <joint name="wheel_rl_joint" class="wheel"/>
+              <geom name="wheel_rl_geom" class="wheel" euler="1.5708 0 0"/>
+              <geom name="wheel_rl_visual" type="mesh" mesh="sawppy_wheel" euler="1.5708 0 0"
+                    material="rover_dark" contype="0" conaffinity="0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <body name="right_rocker" pos="0.142 -0.31 0.0236">
+        <inertial pos="-0.05 0 -0.04" mass="3.0" diaginertia="0.10 0.14 0.08"/>
+        <joint name="right_rocker_joint" class="suspension" range="-0.7854 0.7854"/>
+        <geom type="mesh" mesh="sawppy_right_rocker" material="rover_metal" contype="0" conaffinity="0"/>
+        <body name="front_right_steer" pos="0.4232 -0.15 -0.0558">
+          <inertial mass="2.4" pos="0 0 -0.05" diaginertia="0.025 0.025 0.018"/>
+          <joint name="front_right_steer_joint" class="steering"/>
+          <geom type="mesh" mesh="sawppy_front_right_steer" material="rover_metal" contype="0" conaffinity="0"/>
+          <body name="wheel_fr" pos="0 0 -0.264">
+            <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+            <joint name="wheel_fr_joint" class="wheel"/>
+            <geom name="wheel_fr_geom" class="wheel" euler="-1.5708 0 0"/>
+            <geom name="wheel_fr_visual" type="mesh" mesh="sawppy_wheel" euler="-1.5708 0 0"
+                  material="rover_dark" contype="0" conaffinity="0"/>
+          </body>
+        </body>
+        <body name="right_bogie" pos="-0.362 -0.05 -0.124">
+          <inertial pos="-0.03 0 -0.02" mass="3.0" diaginertia="0.09 0.12 0.07"/>
+          <joint name="right_bogie_joint" class="suspension" range="-0.7854 0.7854" damping="1.5"/>
+          <geom type="mesh" mesh="sawppy_right_bogie" material="rover_metal" contype="0" conaffinity="0"/>
+          <body name="wheel_mr" pos="0.2126 -0.1858 -0.1918">
+            <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+            <joint name="wheel_mr_joint" class="wheel"/>
+            <geom name="wheel_mr_geom" class="wheel" euler="-1.5708 0 0"/>
+            <geom name="wheel_mr_visual" type="mesh" mesh="sawppy_wheel" euler="-1.5708 0 0"
+                  material="rover_dark" contype="0" conaffinity="0"/>
+          </body>
+          <body name="back_right_steer" pos="-0.298 -0.10 0.0676">
+            <inertial mass="2.4" pos="0 0 -0.05" diaginertia="0.025 0.025 0.018"/>
+            <joint name="back_right_steer_joint" class="steering"/>
+            <geom type="mesh" mesh="sawppy_back_right_steer" material="rover_metal" contype="0" conaffinity="0"/>
+            <body name="wheel_rr" pos="0 0 -0.264">
+              <inertial pos="0 0 0" mass="2.2" diaginertia="0.012 0.016 0.012"/>
+              <joint name="wheel_rr_joint" class="wheel"/>
+              <geom name="wheel_rr_geom" class="wheel" euler="-1.5708 0 0"/>
+              <geom name="wheel_rr_visual" type="mesh" mesh="sawppy_wheel" euler="-1.5708 0 0"
+                    material="rover_dark" contype="0" conaffinity="0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+
+    <body name="grasp_block" pos="0.90 0 0.04">
+      <freejoint name="grasp_block_free"/>
+      <geom name="grasp_block_geom" type="box" size="0.025 0.025 0.04" mass="0.02"
+            rgba="0.78 0.20 0.13 1" friction="2.0 0.01 0.002"
+            solref="0.002 1" solimp="0.99 0.9999 0.001"/>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude body1="base" body2="left_rocker"/>
+    <exclude body1="base" body2="right_rocker"/>
+    <exclude body1="left_rocker" body2="left_bogie"/>
+    <exclude body1="right_rocker" body2="right_bogie"/>
+  </contact>
+  <equality>
+    <joint name="rocker_differential" joint1="left_rocker_joint" joint2="right_rocker_joint"
+           polycoef="0 -1 0 0 0" solref="0.02 1"/>
+    <weld name="base_fix" body1="base" active="false"
+          relpose="0 0 0.417 1 0 0 0" torquescale="1" solref="0.005 1"/>
+  </equality>
+  <actuator>
+    <motor name="wheel_fl_motor" joint="wheel_fl_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <motor name="wheel_ml_motor" joint="wheel_ml_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <motor name="wheel_rl_motor" joint="wheel_rl_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <motor name="wheel_fr_motor" joint="wheel_fr_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <motor name="wheel_mr_motor" joint="wheel_mr_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <motor name="wheel_rr_motor" joint="wheel_rr_joint" ctrllimited="true" ctrlrange="-30 30" forcelimited="true" forcerange="-30 30"/>
+    <position name="front_left_steer_actuator" joint="front_left_steer_joint" kp="240" kv="22" ctrlrange="-0.75 0.75" forcerange="-35 35"/>
+    <position name="front_right_steer_actuator" joint="front_right_steer_joint" kp="240" kv="22" ctrlrange="-0.75 0.75" forcerange="-35 35"/>
+    <position name="back_left_steer_actuator" joint="back_left_steer_joint" kp="240" kv="22" ctrlrange="-0.75 0.75" forcerange="-35 35"/>
+    <position name="back_right_steer_actuator" joint="back_right_steer_joint" kp="240" kv="22" ctrlrange="-0.75 0.75" forcerange="-35 35"/>
+  </actuator>
+  <sensor>
+    <framequat name="base_orientation" objtype="site" objname="imu"/>
+    <gyro name="imu_gyro" site="imu"/>
+    <accelerometer name="imu_accelerometer" site="imu"/>
+  </sensor>
+</mujoco>

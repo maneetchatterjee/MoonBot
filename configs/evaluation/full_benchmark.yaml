@@ -1,0 +1,21 @@
+name: full_benchmark
+episodes_per_scenario: 100
+base_seed: 1000
+paired_scenarios: true
+learned_policy_seeds: [1, 2, 3, 4, 5]
+scenarios:
+  - {id: nominal_flat, task: velocity_tracking, terrain: flat, terrain_difficulty: 0.0, domain_randomization: false}
+  - {id: randomized_flat, task: velocity_tracking, terrain: flat, terrain_difficulty: 0.0, domain_randomization: true}
+  - {id: ramp_id, task: waypoint_navigation, terrain: ramp, terrain_difficulty: 0.45, domain_randomization: true}
+  - {id: sine_id, task: waypoint_navigation, terrain: sine, terrain_difficulty: 0.55, domain_randomization: true}
+  - {id: obstacles_ood, task: waypoint_navigation, terrain: obstacles, terrain_difficulty: 0.85, domain_randomization: true}
+  - {id: asymmetric_ood, task: waypoint_navigation, terrain: asymmetric, terrain_difficulty: 0.9, domain_randomization: true}
+  - {id: terrain_excluded_ood, task: waypoint_navigation, terrain: obstacles, terrain_difficulty: 1.0, domain_randomization: true, ood_randomization: true}
+  - {id: payload_friction_ood, task: payload_transport, terrain: low_friction, terrain_difficulty: 1.0, domain_randomization: true, ood_randomization: true}
+  - {id: external_push_ood, task: waypoint_navigation, terrain: ramp, terrain_difficulty: 0.6, domain_randomization: true, ood_randomization: true, external_push_n: 150.0}
+  - {id: reaching, task: arm_reaching, terrain: flat, terrain_difficulty: 0.0, domain_randomization: true}
+  - {id: mobile_tracking, task: mobile_tracking, terrain: sine, terrain_difficulty: 0.5, domain_randomization: true}
+  - {id: manipulation, task: mobile_manipulation, terrain: flat, terrain_difficulty: 0.0, domain_randomization: true}
+  - {id: imu_dropout, task: waypoint_navigation, terrain: sine, terrain_difficulty: 0.5, domain_randomization: true, sensor_failure: imu_dropout}
+  - {id: encoder_dropout, task: waypoint_navigation, terrain: ramp, terrain_difficulty: 0.5, domain_randomization: true, sensor_failure: wheel_encoder_dropout}
+  - {id: delay_ood, task: waypoint_navigation, terrain: asymmetric, terrain_difficulty: 0.7, domain_randomization: true, ood_randomization: true, observation_delay_steps: 6}

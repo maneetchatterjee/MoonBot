@@ -1,0 +1,19 @@
+name: smoke_benchmark
+episodes_per_scenario: 2
+base_seed: 100
+scenarios:
+  - id: nominal_flat
+    task: velocity_tracking
+    terrain: flat
+    terrain_difficulty: 0.0
+    domain_randomization: false
+  - id: ramp_id
+    task: waypoint_navigation
+    terrain: ramp
+    terrain_difficulty: 0.25
+    domain_randomization: true
+  - id: friction_ood
+    task: waypoint_navigation
+    terrain: low_friction
+    terrain_difficulty: 0.8
+    domain_randomization: true

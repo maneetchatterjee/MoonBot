@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "moonbot-x"
+version = "0.1.0"
+description = "Dynamics-aware control and learning for a six-wheel mobile manipulator"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+  "mujoco>=3.3,<4",
+  "numpy>=2.0",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+analysis = ["imageio>=2.37", "imageio-ffmpeg>=0.6", "matplotlib>=3.9", "pandas>=2.2", "Pillow>=11", "pyarrow>=18", "scipy>=1.14", "seaborn>=0.13"]
+test = ["pytest>=8.3", "ruff>=0.9"]
+learning = ["gymnasium>=1.0", "stable-baselines3>=2.5", "tensorboard>=2.18", "torch>=2.5"]
+control = ["casadi>=3.6", "osqp>=1.0", "scipy>=1.14"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["moonbot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -p no:cacheprovider"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["pytest-cache-files-*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]

@@ -1,0 +1,85 @@
+schema_version: 1
+model_name: MoonBot-X
+parameter_status: provisional_composite_design
+units:
+  length: m
+  mass: kg
+  angle: rad
+  torque: N_m
+provenance:
+  rover_geometry: "Sawppy/Curio BSD-3-Clause meshes and URDF topology at revision baec5d6d82454d7f4859479c7d481657b1890d09, uniformly scaled 2x."
+  arm_geometry: "MuJoCo Menagerie franka_emika_panda at revision c96a32d28fb5da84da38c1da4d749e7a13212855."
+  rover_inertial_properties: "Research-scale ballast and component assumptions; not inherited from stock Sawppy."
+  arm_inertial_properties: "Unmodified Menagerie Panda inertial tensors."
+  actuator_limits: "Menagerie-derived Panda joint torque bounds; provisional rover drive and steering limits."
+  friction: "Simulation assumption pending tire characterization."
+base:
+  design: "2x research-scale Sawppy/Curio derivative with added ballast and Panda mount"
+  chassis_size: [0.85, 0.57, 0.186]
+  ballasted_chassis_mass: 45.0
+  panda_mount_mass: 2.5
+  initial_height: 0.417
+wheels:
+  count: 6
+  radius: 0.12
+  width: 0.20
+  mass_each: 2.2
+  maximum_torque: 30.0
+  maximum_speed: 22.0
+  friction: [1.25, 0.02, 0.003]
+steering:
+  actuated_wheels: [front_left, front_right, back_left, back_right]
+  joint_limits: [-0.75, 0.75]
+  maximum_torque: 35.0
+  control_mode: position
+suspension:
+  architecture: rocker_bogie
+  differential: "Compliant equality constraint approximating the Sawppy closed-loop differential."
+  rocker_limits: [-0.7854, 0.7854]
+  bogie_limits: [-0.7854, 0.7854]
+  source: "Sawppy/Curio topology and meshes, uniformly scaled 2x."
+arm:
+  degrees_of_freedom: 7
+  architecture: "MuJoCo Menagerie Franka Emika Panda rigid-body model mounted without geometric scaling."
+  mount_position: [0.14, 0.0, 0.143]
+  mount_pitch: 0.523599
+  mount_rationale: "Thirty-degree forward adapter gives the unscaled Panda a collision-free ground-pick workspace in front of the rover."
+  model_revision: c96a32d28fb5da84da38c1da4d749e7a13212855
+  joint_limits:
+    - [-2.8973, 2.8973]
+    - [-1.7628, 1.7628]
+    - [-2.8973, 2.8973]
+    - [-3.0718, -0.0698]
+    - [-2.8973, 2.8973]
+    - [-0.0175, 3.7525]
+    - [-2.8973, 2.8973]
+  maximum_torques: [87.0, 87.0, 87.0, 87.0, 12.0, 12.0, 12.0]
+gripper:
+  type: "Menagerie Panda tendon-coupled parallel jaw"
+  finger_travel_each: 0.04
+  maximum_inner_aperture: 0.08
+  tendon_force_limit: 70.0
+  tendon_position_stiffness: 2000.0
+  tendon_velocity_damping: 50.0
+  fingertip_touch_sensors: 2
+  source: "MuJoCo Menagerie Franka Emika Panda visual and collision model."
+  nominal_test_block_size: [0.05, 0.05, 0.08]
+  nominal_test_block_mass: 0.02
+  nominal_test_block_density: 100.0
+  fingertip_block_friction: [2.0, 0.01, 0.002]
+  fingertip_material_assumption: "High-friction elastomer pads; coefficient requires hardware identification."
+  custom_jaw_liner_size: [0.02, 0.008, 0.056]
+  grasp_mode: "bilateral fingertip contact and friction only; no weld or kinematic object following"
+simulation:
+  physics_timestep: 0.002
+  solver: Newton
+  iterations: 120
+  friction_cone: pyramidal
+  noslip_iterations: 20
+  friction_impedance_ratio: 20
+  low_level_rate_hz: 100
+limitations:
+  - "The rover is a 2x scaled and ballasted Sawppy derivative, not a stock Sawppy hardware configuration."
+  - "Rover mass, inertia, tire contact, drive torque, and steering limits require hardware validation."
+  - "The rocker differential is approximated by a compliant equality constraint instead of explicit turnbuckles."
+  - "Mount structural strength and tip-over margins require engineering analysis before fabrication."

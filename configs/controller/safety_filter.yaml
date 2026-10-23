@@ -1,0 +1,8 @@
+solver: osqp
+attitude_limit_deg: 22.0
+minimum_stability_margin_m: 0.04
+wheel_torque_bounds_nm: [-30.0, 30.0]
+wheel_torque_rate_nm_s: 120.0
+arm_action_rate_nm_s: 120.0
+formal_guarantee: false
+notes: "Box constraints are enforced by QP; attitude, margin, and joint proximity rules are heuristic constraints."

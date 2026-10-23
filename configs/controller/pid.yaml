@@ -1,0 +1,15 @@
+control_rate_hz: 100
+wheel_radius: 0.12
+track_width: 1.0
+linear:
+  kp: 8.0
+  ki: 1.0
+  kd: 0.15
+  integral_limit: 3.0
+angular:
+  kp: 4.0
+  ki: 0.5
+  kd: 0.08
+  integral_limit: 2.0
+maximum_wheel_torque: 30.0
+maximum_torque_rate: 120.0

@@ -1,0 +1,18 @@
+physics_timestep_s: 0.002
+policy_rate_hz: 25
+episode_seconds: 12.0
+reward_weights:
+  velocity_tracking: 1.5
+  waypoint_progress: 8.0
+  end_effector_tracking: 2.0
+  upright: 1.5
+  stability: 0.3
+  slip: 0.04
+  energy: 0.01
+  smoothness: 0.02
+  collision: 2.0
+  completion: 25.0
+success_thresholds:
+  waypoint_m: 0.25
+  end_effector_m: 0.035
+  placement_m: 0.20
