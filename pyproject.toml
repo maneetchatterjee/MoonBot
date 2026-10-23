@@ -30,7 +30,7 @@ addopts = "-ra -p no:cacheprovider"
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-exclude = ["pytest-cache-files-*"]
+exclude = ["pytest-cache-files-*", "legacy"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
